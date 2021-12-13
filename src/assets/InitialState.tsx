@@ -5,5 +5,6 @@ export const InitialState = {
 
     notifications: [],
     toggleNotifications: false,
+    users: []
 
 };
