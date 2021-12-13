@@ -29,9 +29,11 @@ export const DatabaseOperationControlPanel = () => {
                     </Link>
                 </ButtonGroup>
                 <ButtonGroup className="me-2" aria-label="Clear database button">
-                    <Button variant="outline-primary">
-                        Clear DB
-                    </Button>
+                    <Link to="clear-db">
+                        <Button variant="outline-primary">
+                            Clear DB
+                        </Button>
+                    </Link>
                 </ButtonGroup>
             </ButtonToolbar>
         </>
