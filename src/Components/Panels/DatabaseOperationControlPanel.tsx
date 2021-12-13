@@ -20,23 +20,23 @@ export const DatabaseOperationControlPanel = () => {
                     </Link>
                 </ButtonGroup>
                 <ButtonGroup className="me-2" aria-label="Query database button">
-                    <Link to="query-db">
+                    <Link to="/query-db">
                         <Button variant="outline-primary">
                             Query DB
                         </Button>
                     </Link>
                 </ButtonGroup>
                 <ButtonGroup className="me-2" aria-label="Insert data into DB button">
-                    <Link to="insert-db">
+                    <Link to="/insert-db">
                         <Button variant="outline-primary">
                             Insert Data into DB
                         </Button>
                     </Link>
                 </ButtonGroup>
                 <ButtonGroup className="me-2" aria-label="Clear database button">
-                    <Link to="clear-db">
+                    <Link to="/remove-db">
                         <Button variant="outline-primary">
-                            Clear DB
+                            Remove DB
                         </Button>
                     </Link>
                 </ButtonGroup>
