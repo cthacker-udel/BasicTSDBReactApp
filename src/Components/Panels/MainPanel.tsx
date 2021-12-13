@@ -1,9 +1,14 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col, Offcanvas } from "react-bootstrap";
+import { UseDispatchContext } from "../../util/useReducerUtil/UseDispatchContext";
+import { UseStateContext } from "../../util/useReducerUtil/UseStateContext";
 import { DatabaseNavbar } from "../Navbar/DatabaseNavbar";
 import { NotificationPanel } from "./NotificationPanel";
 
 export const MainPanel = () => {
+
+    const { state } = UseStateContext();
+    const { dispatch } = UseDispatchContext();
 
     return(
         <>
@@ -13,11 +18,19 @@ export const MainPanel = () => {
                         <DatabaseNavbar />
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
+                <Offcanvas
+                show={state.toggleNotifications}
+                onHide={ () => {
+                    dispatch({type: "toggleNotifications", payload: { ...state, toggleNotifications: !state.toggleNotifications }});
+                }}
+                >
+                    <Offcanvas.Header closeButton>
+                        Notifications
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
                         <NotificationPanel />
-                    </Col>
-                </Row>
+                    </Offcanvas.Body>
+                </Offcanvas>
             </Container>
         </>
     );

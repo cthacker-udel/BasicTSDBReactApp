@@ -7,6 +7,12 @@ export const DatabaseReducerLogic = (state: State, action: DatabaseAction ): Sta
 
     switch(action.type) {
 
+        case "toggleNotifications": {
+            return produce(state, (draft) => {
+                draft.toggleNotifications = action.payload.toggleNotifications;
+            });
+        }
+
         default: {
             return { ...state };
         }
