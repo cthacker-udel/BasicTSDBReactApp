@@ -24,4 +24,4 @@ yarn-error.log*
 
 # server files
 
-/src/NodeScripts/
+/credentials.json
