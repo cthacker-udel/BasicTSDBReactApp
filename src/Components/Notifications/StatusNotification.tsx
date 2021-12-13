@@ -2,12 +2,17 @@ import React from 'react';
 import { Toast } from 'react-bootstrap';
 
 
-export const StatusNotification = () => {
+export const StatusNotification = (props: {header: string, body: string}) => {
 
     return(
 
         <Toast>
-            This is a toast
+            <Toast.Header>
+                {props.header}
+            </Toast.Header>
+            <Toast.Body>
+                {props.body}
+            </Toast.Body>
         </Toast>
 
     );

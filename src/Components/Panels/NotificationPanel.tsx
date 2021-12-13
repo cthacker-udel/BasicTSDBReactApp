@@ -1,8 +1,13 @@
 import React from 'react';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
+import { UseStateContext } from '../../util/useReducerUtil/UseStateContext';
+import { UseDispatchContext } from '../../util/useReducerUtil/UseDispatchContext';
+import { StatusNotification } from '../Notifications/StatusNotification';
 
 export const NotificationPanel = () => {
 
+    const { state } = UseStateContext();
+    const { dispatch } = UseDispatchContext();
 
     return(
 
@@ -17,7 +22,15 @@ export const NotificationPanel = () => {
                 <Row>
                     <Col xs={6}>
                         <ListGroup>
-                            <ListGroup.Item variant="primary">Example Notification</ListGroup.Item>
+                            {
+                                state.notifications.map((eachNotification, index) => {
+
+                                    <ListGroup.Item variant="primary" key={index}>
+                                            <StatusNotification header={eachNotification.header} body={eachNotification.body} />
+                                    </ListGroup.Item>
+
+                                })
+                            }
                         </ListGroup>
                     </Col>
                 </Row>
