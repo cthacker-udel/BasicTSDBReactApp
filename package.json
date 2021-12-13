@@ -10,7 +10,11 @@
     "@types/node": "^12.20.37",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
+    "bootstrap": "^5.1.3",
+    "concurrently": "^6.4.0",
+    "immer": "^9.0.7",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "typescript": "^4.5.3",
@@ -20,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently --kill-others-on-fail \"nodemon src/NodeScripts/MongoDatabaseServer.js\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
