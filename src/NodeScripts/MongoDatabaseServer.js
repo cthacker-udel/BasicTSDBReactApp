@@ -8,16 +8,20 @@ app.use(cors());
 
 const uri = MongoCredentials.MongoConnectURI;
 
-app.get('/query', async (req, res, next) => {
+const queryAllArray = [];
+
+app.get('/query-all', async (req, res, next) => {
     console.log('querying');
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     try{
         const result = client.connect(err => {
-            const collection = client.db("Ticketing").collection("Customers");
+            const collection = client.db("Ticketing").collection("Users");
             // do operations
-            console.log("result = ", collection);
-            client.close();
-        })
+            const cursor = collection.find();
+            cursor.forEach((eachDocument) => queryAllArray.push(eachDocument));
+        });
+        client.close();
+        return res.status(200).json(queryAllArray);
     } catch (error) {
         throw new Error("MongoClient exception");
     }
@@ -37,8 +41,8 @@ app.post('/insert', async (req, res, next) => {
                 Status: req.body.status
             });
         });
-        return res.status(200);
         client.close();
+        return res.status(200).json(req.body);
     } catch (error) {
         throw new Error("MongoClient exception");
     }

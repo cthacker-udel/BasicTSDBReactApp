@@ -6,4 +6,5 @@ export interface State{
     notifications: Notification[],
     toggleNotifications: boolean,
     users: User[]
+    newUser: User
 }

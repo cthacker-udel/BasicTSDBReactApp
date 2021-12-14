@@ -5,6 +5,12 @@ export const InitialState = {
 
     notifications: [],
     toggleNotifications: false,
-    users: []
+    users: [],
+    newUser: {
+        firstname: "",
+        lastname: "",
+        dob: "",
+        status: ""
+    }
 
 };

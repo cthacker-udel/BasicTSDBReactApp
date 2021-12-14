@@ -3,8 +3,13 @@ import { Col, Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { DatabaseNavbar } from "../Navbar/DatabaseNavbar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { UseDispatchContext } from "../../util/useReducerUtil/UseDispatchContext";
+import { UseStateContext } from "../../util/useReducerUtil/UseStateContext";
 
 export const InsertDBPanel = () => {
+
+    const { dispatch } = UseDispatchContext();
+    const { state } = UseStateContext();
 
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
@@ -35,8 +40,13 @@ export const InsertDBPanel = () => {
                     status: status
                 })
             })
-            .then((status) => {
-                console.debug("Status of insert request is : ", status);
+            .then((response) => {
+                dispatch({type: "addUser", payload: { ...state, newUser: {
+                    firstname: firstName,
+                    lastname: lastName,
+                    dob: dob.toUTCString(),
+                    status: status
+                }}});
             })
             .catch((err) => {
                 console.log("post error = ", err);

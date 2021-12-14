@@ -12,6 +12,16 @@ export const DatabaseReducerLogic = (state: State, action: DatabaseAction ): Sta
                 draft.toggleNotifications = action.payload.toggleNotifications;
             });
         }
+        case "addUser": {
+            return produce(state, (draft) => {
+                draft.users = [...draft.users, action.payload.newUser];
+            });
+        }
+        case "updateUsers": {
+            return produce(state, (draft) => {
+                draft.users = action.payload.users;
+            });
+        }
 
         default: {
             return { ...state };
