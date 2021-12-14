@@ -1,15 +1,16 @@
 const { MongoClient } = require('mongodb');
+const cors = require('cors');
 const MongoCredentials = require('../../credentials.json');
 var express = require('express');
 var app = express();
 app.use(express.json());
+app.use(cors());
 
 const uri = MongoCredentials.MongoConnectURI;
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
 app.get('/query', async (req, res, next) => {
     console.log('querying');
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     try{
         const result = client.connect(err => {
             const collection = client.db("Ticketing").collection("Customers");
@@ -24,7 +25,8 @@ app.get('/query', async (req, res, next) => {
 });
 
 app.post('/insert', async (req, res, next) => {
-
+    console.log("POSTING with req = ", req.body);
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     try{
         const result = client.connect(err => {
             const collection = client.db("Ticketing").collection("Users");
@@ -34,8 +36,9 @@ app.post('/insert', async (req, res, next) => {
                 DOB: req.body.dob,
                 Status: req.body.status
             });
-            client.close();
         });
+        return res.status(200);
+        client.close();
     } catch (error) {
         throw new Error("MongoClient exception");
     }

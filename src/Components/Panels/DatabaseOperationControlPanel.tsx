@@ -12,6 +12,13 @@ export const DatabaseOperationControlPanel = () => {
     return(
         <>
             <ButtonToolbar>
+                <ButtonGroup className="me-2" aria-label="MainPage button">
+                    <Link to="/mainpage">
+                        <Button variant="outline-primary">
+                            MainPage
+                        </Button>
+                    </Link>
+                </ButtonGroup>
                 <ButtonGroup className="me-2" aria-label="Load database button">
                     <Link to="/load-db">
                         <Button variant="outline-primary">

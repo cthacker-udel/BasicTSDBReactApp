@@ -8,6 +8,7 @@ import { InitialState } from "../assets/InitialState";
 import { DatabaseNavbar } from "./Navbar/DatabaseNavbar";
 import { Routes, Route } from "react-router-dom";
 import { MainPanel } from "./Panels/MainPanel";
+import { InsertDBPanel } from "./Panels/InsertDBPanel";
 
 export const MainPage = () => {
 
@@ -33,7 +34,7 @@ export const MainPage = () => {
                     <Route path="/remove-db">
                         {/* Load up page to remove db*/}
                     </Route>
-                    <Route path="/insert-db">
+                    <Route path="/insert-db" element={<InsertDBPanel />}>
                         {/*Load up page to insert into db*/}
                     </Route>
                     <Route path="*" element={<MainPanel />} />
