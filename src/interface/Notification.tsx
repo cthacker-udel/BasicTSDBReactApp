@@ -3,6 +3,6 @@ export interface Notification{
 
     header: string,
     body: string
-    now: Date
+    type: string
 
 }

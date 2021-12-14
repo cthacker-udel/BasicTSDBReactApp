@@ -70,6 +70,16 @@ export const InsertDBPanel = () => {
                 dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}`,
                 status: status
             }}});
+            dispatch({type: "updateNotifications", payload: { ...state, notifications: [
+
+                ...state.notifications,
+                {
+                    header: `Added User : ${firstName} ${lastName}`,
+                    body: `${new Date().toDateString()}`,
+                    type: "success"
+                }
+
+            ]}})
         }
     }
 

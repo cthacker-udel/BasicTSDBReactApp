@@ -12,9 +12,9 @@ export const DatabaseReducerLogic = (state: State, action: DatabaseAction ): Sta
                 draft.toggleNotifications = action.payload.toggleNotifications;
             });
         }
-        case "addNotification": {
+        case "updateNotifications": {
             return produce(state, (draft) => {
-
+                draft.notifications = action.payload.notifications;
             });
         }
         case "addUser": {

@@ -8,28 +8,29 @@ export const NotificationPanel = () => {
 
     const { state } = UseStateContext();
 
+    console.log("notif state = ", state);
+
     return(
-
         <>
-
             <Container>
                 <Row>
-                    <Col xs={6}>
+                    <Col>
                         <ListGroup>
                             {
                                 state.notifications.map((eachNotification, index) => {
-                                    <ListGroup.Item variant="primary" key={index}>
+
+                                    return(
+                                    <ListGroup.Item variant={eachNotification.type} key={index}>
                                             <StatusNotification header={eachNotification.header} body={eachNotification.body} />
                                     </ListGroup.Item>
+                                    );
                                 })
                             }
                         </ListGroup>
                     </Col>
                 </Row>
             </Container>
-
         </>
-
     );
 
-}
+};
