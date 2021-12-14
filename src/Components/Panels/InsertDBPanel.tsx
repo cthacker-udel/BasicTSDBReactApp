@@ -26,33 +26,50 @@ export const InsertDBPanel = () => {
             },3000);
         } else {
             // valid inputs
-            fetch('http://localhost:5000/insert', {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    firstname: firstName,
-                    lastname: lastName,
-                    dob: dob,
-                    status: status
+            /*
+            try { 
+                fetch('http://localhost:5000/insert', {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstname: firstName,
+                        lastname: lastName,
+                        dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}`,
+                        status: status
+                    })
                 })
-            })
-            .then((response) => {
+                .then((response) => {
+                    dispatch({type: "addUser", payload: { ...state, newUser: {
+                        firstname: firstName,
+                        lastname: lastName,
+                        dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}`,
+                        status: status
+                    }}});
+                })
+                .catch((err) => {
+                    console.log("post error = ", err);
+                });
+            } catch (err) {
+                console.log("in insert err = ", err);
                 dispatch({type: "addUser", payload: { ...state, newUser: {
                     firstname: firstName,
                     lastname: lastName,
-                    dob: dob.toUTCString(),
+                    dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}`,
                     status: status
                 }}});
-            })
-            .catch((err) => {
-                console.log("post error = ", err);
-            });
+            }
+            */
+            dispatch({type: "addUser", payload: { ...state, newUser: {
+                firstname: firstName,
+                lastname: lastName,
+                dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}`,
+                status: status
+            }}});
         }
-
     }
 
     return(

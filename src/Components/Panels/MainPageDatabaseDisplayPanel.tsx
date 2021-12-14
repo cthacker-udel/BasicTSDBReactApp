@@ -20,32 +20,43 @@ export const MainPageDatabaseDisplayPanel = () => {
     const { state } = UseStateContext();
     const { dispatch } = UseDispatchContext();
 
-    useEffect(() => {
-        fetch("http://localhost:5000/query-all")
-        .then((response) => {
-            let jsonResult: User[] = [];
-            let ids: ObjectId[] = [];
-            response.text().then(result => {
-                const ResponseResult: ResponseInterface[] = JSON.parse(result);
+    console.log("state = ", state);
 
-                const idSet = new Set(ResponseResult.map(eachResponse => eachResponse._id));
-                const filteredResponse: ResponseInterface[] = [];
-                const idSetValuesArray = Array.from(idSet.values());
-                for (const eachId of idSetValuesArray) {
-                    const result = ResponseResult.find((eachResponse) => eachResponse._id.toString() === eachId.toString());
-                    if (result !== undefined) {
-                        filteredResponse.push(result);
+    useEffect(() => {
+        /*
+        try{
+            fetch("http://localhost:5000/query-all")
+            .then((response) => {
+                let jsonResult: User[] = [];
+                let ids: ObjectId[] = [];
+                response.text().then(result => {
+                    const ResponseResult: ResponseInterface[] = JSON.parse(result);
+
+                    const idSet = new Set(ResponseResult.map(eachResponse => eachResponse._id));
+                    const filteredResponse: ResponseInterface[] = [];
+                    const idSetValuesArray = Array.from(idSet.values());
+                    for (const eachId of idSetValuesArray) {
+                        const result = ResponseResult.find((eachResponse) => eachResponse._id.toString() === eachId.toString());
+                        if (result !== undefined) {
+                            filteredResponse.push(result);
+                        }
                     }
-                }
-                jsonResult = filteredResponse.map((eachResponse) => ({
-                    firstname: eachResponse.First,
-                    lastname: eachResponse.Last,
-                    dob: eachResponse.DOB,
-                    status: eachResponse.Status,
-                }));
-                dispatch({type: "updateUsers", payload: { ...state, users: jsonResult }});
+                    jsonResult = filteredResponse.map((eachResponse) => ({
+                        firstname: eachResponse.First,
+                        lastname: eachResponse.Last,
+                        dob: eachResponse.DOB,
+                        status: eachResponse.Status,
+                    }));
+                    dispatch({type: "updateUsers", payload: { ...state, users: jsonResult }});
+                });
+            })
+            .catch(err => {
+                console.log(err);
             });
-        });
+        } catch (err) {
+            console.log("err = ", err);
+        }
+        */
     },[]);
 
     return(

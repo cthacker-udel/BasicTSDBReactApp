@@ -34,10 +34,22 @@ export const MainPage = () => {
                     <Route path="/remove-db">
                         {/* Load up page to remove db*/}
                     </Route>
-                    <Route path="/insert-db" element={<InsertDBPanel />}>
+                    <Route path="/insert-db" element={
+                        <DispatchContext.Provider value={dispatchValue}>
+                            <StateContext.Provider value={stateValue}>
+                                <InsertDBPanel />
+                            </StateContext.Provider>
+                        </DispatchContext.Provider>
+                    }>
                         {/*Load up page to insert into db*/}
                     </Route>
-                    <Route path="*" element={<MainPanel />} />
+                    <Route path="*" element={
+                        <DispatchContext.Provider value={dispatchValue}>
+                            <StateContext.Provider value={stateValue}>
+                                <MainPanel />
+                            </StateContext.Provider>
+                        </DispatchContext.Provider>
+                    } />
                 </Routes>
             </StateContext.Provider>
         </DispatchContext.Provider>
