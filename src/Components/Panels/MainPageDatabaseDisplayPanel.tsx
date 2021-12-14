@@ -21,25 +21,31 @@ export const MainPageDatabaseDisplayPanel = () => {
     const { dispatch } = UseDispatchContext();
 
     useEffect(() => {
-
         fetch("http://localhost:5000/query-all")
         .then((response) => {
             let jsonResult: User[] = [];
             let ids: ObjectId[] = [];
             response.text().then(result => {
                 const ResponseResult: ResponseInterface[] = JSON.parse(result);
-                jsonResult = JSON.parse(result).map((eachUser: { _id: ObjectId, First: string, Last: string, DOB: string, Status: string }) => ({
-                    firstname: eachUser.First,
-                    lastname: eachUser.Last,
-                    dob: eachUser.DOB,
-                    status: eachUser.Status
+
+                const idSet = new Set(ResponseResult.map(eachResponse => eachResponse._id));
+                const filteredResponse: ResponseInterface[] = [];
+                const idSetValuesArray = Array.from(idSet.values());
+                for (const eachId of idSetValuesArray) {
+                    const result = ResponseResult.find((eachResponse) => eachResponse._id.toString() === eachId.toString());
+                    if (result !== undefined) {
+                        filteredResponse.push(result);
+                    }
+                }
+                jsonResult = filteredResponse.map((eachResponse) => ({
+                    firstname: eachResponse.First,
+                    lastname: eachResponse.Last,
+                    dob: eachResponse.DOB,
+                    status: eachResponse.Status,
                 }));
-                ids = JSON.parse(result).map((eachUser: { _id: ObjectId, First: string, Last: string, DOB: string, Status: string }) => eachUser._id);
-                const setIds = new Set(ids.map(eachId => eachId.toString()));
                 dispatch({type: "updateUsers", payload: { ...state, users: jsonResult }});
             });
         });
-
     },[]);
 
     return(
