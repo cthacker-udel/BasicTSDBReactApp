@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Col, Container, Form, Row, Button, Alert } from "react-bootstrap";
 import { DatabaseNavbar } from "../Navbar/DatabaseNavbar";
+import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UseDispatchContext } from "../../util/useReducerUtil/UseDispatchContext";
@@ -149,9 +150,11 @@ export const InsertDBPanel = () => {
             </Row>
             <Row style={{ textAlign: "center"}}>
                 <Col>
-                        <Button onClick={() => onClickHandler()} style={{ textAlign: "center" }}>
-                            Submit Document to Database
-                        </Button>
+                        <Link to="/mainpage">
+                            <Button onClick={() => onClickHandler()} style={{ textAlign: "center" }}>
+                                Submit Document to Database
+                            </Button>
+                        </Link>
                 </Col>
             </Row>
             <br />
