@@ -28,13 +28,26 @@ app.get('/query-all', async (req, res, next) => {
 
 });
 
-app.get('/query', async (req, res, next) => {
+app.post('/query', async (req, res, next) => {
 
     console.log("querying with request");
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     let results = [];
     try{
-        client.db("Ticketing").collection("Users").find(req.body).toArray((err, result) => {
+
+        // form request
+        let request = {};
+        if (req.body.firstname) {
+            request = { firstname: req.body.firstname };
+        } if (req.body.lastname) {
+            request = { ...request, lastname: req.body.lastname };
+        } if (req.body.dob) {
+            request = { ...request, dob: req.body.dob };
+        } if (req.body.status) {
+            request = { ...request, status: req.body.status };
+        }
+
+        client.db("Ticketing").collection("Users").find(request).toArray((err, result) => {
             if (err) {
                 throw err;
             } else {
@@ -42,7 +55,7 @@ app.get('/query', async (req, res, next) => {
             }
         });
     } catch (error) {
-        throw new Error("MongoClient exception");
+        console.log("querying error = ", error);
     }
     client.close();
     return res.status(200).json(results);
