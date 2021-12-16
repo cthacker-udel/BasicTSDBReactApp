@@ -5,18 +5,18 @@ import Datepicker from "react-datepicker";
 
 export const QueryDBPanel = (): JSX.Element => {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [dob, setDob] = useState(new Date());
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [dob, setDob] = useState<Date>(new Date());
     const [status, setStatus] = useState('Select a Status');
-    const [toggleFirstName, setToggleFirstName] = useState(false);
-    const [toggleLastName, setToggleLastName] = useState(false);
-    const [toggleDob, setToggleDob] = useState(false);
-    const [toggleStatus, setToggleStatus] = useState(false);
+    const [toggleFirstName, setToggleFirstName] = useState<boolean>(false);
+    const [toggleLastName, setToggleLastName] = useState<boolean>(false);
+    const [toggleDob, setToggleDob] = useState<boolean>(false);
+    const [toggleStatus, setToggleStatus] = useState<boolean>(false);
 
     const onClickHandler = () => {
 
-        let request = {};
+        let request: Object = {};
         const uri = (!toggleFirstName && !toggleLastName && !toggleDob && !toggleStatus) ? 'http://localhost:5000/query-all' : 'http://localhost:5000/query';
         if (toggleFirstName && firstName !== '') {
             request = { firstname: firstName }
