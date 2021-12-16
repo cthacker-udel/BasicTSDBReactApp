@@ -8,11 +8,27 @@ export const QueryDBPanel = (): JSX.Element => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState(new Date());
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('Select a Status');
+    const [toggleFirstName, setToggleFirstName] = useState(false);
+    const [toggleLastName, setToggleLastName] = useState(false);
+    const [toggleDob, setToggleDob] = useState(false);
+    const [toggleStatus, setToggleStatus] = useState(false);
 
     const onClickHandler = () => {
 
-        fetch('http://localhost:5000/query',
+        let request = {};
+        const uri = (!toggleFirstName && !toggleLastName && !toggleDob && !toggleStatus) ? 'http://localhost:5000/query-all' : 'http://localhost:5000/query';
+        if (toggleFirstName && firstName !== '') {
+            request = { firstname: firstName }
+        } if (toggleLastName && lastName !== '') {
+            request = { ...request, lastname: lastName }
+        } if (toggleDob) {
+            request = { ...request, dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}` };
+        } if (toggleStatus && status !== 'Select a Status') {
+            request = { ...request, status: status };
+        }
+
+        fetch(uri,
             {
                 method: 'POST',
                 mode: 'cors',
@@ -20,16 +36,11 @@ export const QueryDBPanel = (): JSX.Element => {
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({
-                    firstname: firstName,
-                    lastname: lastName,
-                    dob: `${dob.getMonth()}/${dob.getDate()}/${dob.getFullYear()}`,
-                    status: status
-                })
+                body: JSON.stringify(request)
             }
         )
         .then((response) => {
-            console.log("response = ", response);
+            console.log("response = ", response.text().then((theText) => console.log(theText)));
         })
         .catch((error) => {
             console.log("fetch error = ", error);
@@ -42,6 +53,51 @@ export const QueryDBPanel = (): JSX.Element => {
                 <Row>
                     <Col>
                 <DatabaseNavbar />
+                    </Col>
+                </Row>
+                <br />
+                <br />
+                <br />
+                <Row>
+                    <Col>
+                        <Form>
+                            <Form.Label style={{ textAlign: 'center', display: 'block'}}>Filter Panel</Form.Label>
+                            <br />
+                            <Row>
+                                <Col>
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="firstname-check"
+                                        label="Toggle First Name query"
+                                        onChange={() => {setToggleFirstName(!toggleFirstName)}}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="lastname-check"
+                                        label="Toggle Last Name query"
+                                        onChange={() => {setToggleLastName(!toggleLastName)}}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="dob-check"
+                                        label="Toggle DOB query"
+                                        onChange={() => {setToggleDob(!toggleDob)}}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="status-check"
+                                        label="Toggle Status query"
+                                        onChange={() => {setToggleStatus(!toggleStatus)}}
+                                    />
+                                </Col>
+                            </Row>
+                        </Form>
                     </Col>
                 </Row>
                 <br />

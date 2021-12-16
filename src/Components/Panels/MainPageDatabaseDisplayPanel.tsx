@@ -23,7 +23,6 @@ export const MainPageDatabaseDisplayPanel = () => {
     console.log("state = ", state);
 
     useEffect(() => {
-        /*
         try{
             fetch("http://localhost:5000/query-all")
             .then((response) => {
@@ -56,7 +55,6 @@ export const MainPageDatabaseDisplayPanel = () => {
         } catch (err) {
             console.log("err = ", err);
         }
-        */
     },[]);
 
     return(

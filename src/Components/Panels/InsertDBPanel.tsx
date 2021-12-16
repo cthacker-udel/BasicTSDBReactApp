@@ -27,7 +27,6 @@ export const InsertDBPanel = () => {
             },3000);
         } else {
             // valid inputs
-            /*
             try { 
                 fetch('http://localhost:5000/insert', {
                     method: 'POST',
@@ -63,7 +62,6 @@ export const InsertDBPanel = () => {
                     status: status
                 }}});
             }
-            */
             dispatch({type: "addUser", payload: { ...state, newUser: {
                 firstname: firstName,
                 lastname: lastName,
