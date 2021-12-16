@@ -27,7 +27,6 @@ export const MainPageDatabaseDisplayPanel = () => {
             fetch("http://localhost:5000/query-all")
             .then((response) => {
                 let jsonResult: User[] = [];
-                let ids: ObjectId[] = [];
                 response.text().then(result => {
                     const ResponseResult: ResponseInterface[] = JSON.parse(result);
 

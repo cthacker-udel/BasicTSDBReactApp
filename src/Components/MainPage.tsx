@@ -2,11 +2,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { NotificationPanel } from "./Panels/NotificationPanel";
 import { StateContext } from "../util/Context/StateContext";
 import { DispatchContext } from "../util/Context/DispatchContext";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { DatabaseReducerLogic } from "../util/useReducerUtil/DatabaseReducerLogic";
 import { InitialState } from "../assets/InitialState";
 import { DatabaseNavbar } from "./Navbar/DatabaseNavbar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { MainPanel } from "./Panels/MainPanel";
 import { InsertDBPanel } from "./Panels/InsertDBPanel";
 import { QueryDBPanel } from "./Panels/QueryDBPanel";
@@ -56,6 +56,7 @@ export const MainPage = () => {
                             </StateContext.Provider>
                         </DispatchContext.Provider>
                     } />
+                    <Route path="/" element={<Navigate to="/mainpage" />} />
                 </Routes>
             </StateContext.Provider>
         </DispatchContext.Provider>
