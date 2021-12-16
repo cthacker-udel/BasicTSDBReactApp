@@ -27,19 +27,6 @@ export const MainPanel = () => {
                         <MainPageDatabaseDisplayPanel />
                     </Col>
                 </Row>
-                <Offcanvas
-                show={state.toggleNotifications}
-                onHide={ () => {
-                    dispatch({type: "toggleNotifications", payload: { ...state, toggleNotifications: !state.toggleNotifications }});
-                }}
-                >
-                    <Offcanvas.Header closeButton>
-                        Notifications
-                    </Offcanvas.Header>
-                    <Offcanvas.Body>
-                        <NotificationPanel />
-                    </Offcanvas.Body>
-                </Offcanvas>
             </Container>
         </>
     );
