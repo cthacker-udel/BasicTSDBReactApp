@@ -28,6 +28,26 @@ app.get('/query-all', async (req, res, next) => {
 
 });
 
+app.get('/query', async (req, res, next) => {
+
+    console.log("querying with request");
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    let results = [];
+    try{
+        client.db("Ticketing").collection("Users").find(req.body).toArray((err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                results.push(result);
+            }
+        });
+    } catch (error) {
+        throw new Error("MongoClient exception");
+    }
+    client.close();
+    return res.status(200).json(results);
+});
+
 app.post('/insert', async (req, res, next) => {
     console.log("POSTING with req = ", req.body);
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });

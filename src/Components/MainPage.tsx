@@ -9,6 +9,7 @@ import { DatabaseNavbar } from "./Navbar/DatabaseNavbar";
 import { Routes, Route } from "react-router-dom";
 import { MainPanel } from "./Panels/MainPanel";
 import { InsertDBPanel } from "./Panels/InsertDBPanel";
+import { QueryDBPanel } from "./Panels/QueryDBPanel";
 
 export const MainPage = () => {
 
@@ -28,8 +29,13 @@ export const MainPage = () => {
                     <Route path="/load-db">
                         {/* Load db component page */}
                     </Route>
-                    <Route path="/query-db">
-                        {/* Load up page to query db */}
+                    <Route path="/query-db" element={
+                        <DispatchContext.Provider value={dispatchValue}>
+                        <StateContext.Provider value={stateValue}>
+                            <QueryDBPanel />
+                        </StateContext.Provider>
+                        </DispatchContext.Provider>
+                    }>
                     </Route>
                     <Route path="/remove-db">
                         {/* Load up page to remove db*/}
